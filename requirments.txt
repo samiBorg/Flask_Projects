@@ -1,0 +1,10 @@
+Flask-JWT-Extended
+Flask-Smorest
+Flask-SQLAlchemy
+passlib
+marshmallow
+python-dotenv
+gunicorn
+psycopg2
+aioredis==2.0.1
+Flask-Caching==2.0.2
