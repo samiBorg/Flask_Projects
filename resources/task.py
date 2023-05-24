@@ -2,13 +2,17 @@ from flask.views import MethodView
 from flask_smorest import Blueprint, abort
 from flask_jwt_extended import jwt_required, get_jwt
 from sqlalchemy.exc import SQLAlchemyError
+import config
+#import app
 
 from db import db
 from models import TaskModel
 from schemas import TaskSchema, TaskUpdateSchema
+from flask_caching import Cache
 
 blp = Blueprint("Tasks", "task", description="Operations on task")
 
+cache = Cache()
 
 @blp.route("/task/<string:task_id>")
 @cache.cached(timeout=30, query_string=True)
@@ -48,7 +52,7 @@ class Task(MethodView):
 
 
 @blp.route("/task")
-@cache.cached(timeout=30, query_string=True)
+#@cache.cached(timeout=30, query_string=True)
 class TaskList(MethodView):
     @jwt_required()
     @blp.response(200, TaskSchema(many=True))

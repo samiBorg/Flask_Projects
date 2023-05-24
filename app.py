@@ -24,9 +24,11 @@ def create_app(db_url=None):
     app.config[
         "OPENAPI_SWAGGER_UI_URL"
     ] = "https://cdn.jsdelivr.net/npm/swagger-ui-dist/"
-    app.config["SQLALCHEMY_DATABASE_URI"] = db_url or "sqlite:///data.db"
+    app.config["SQLALCHEMY_DATABASE_URI"] = db_url or "postgresql+psycopg2://test:test@db/test"
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     app.config["PROPAGATE_EXCEPTIONS"] = True
+    app.config.from_object('config.Config')  # Set the configuration variables to the flask application
+
     db.init_app(app)
     api = Api(app)
 
@@ -97,6 +99,12 @@ def create_app(db_url=None):
         )
 
     # JWT configuration ends
+
+
+    
+
+
+
 
     with app.app_context():
         import models  # noqa: F401

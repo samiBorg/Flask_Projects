@@ -7,4 +7,4 @@ COPY requirments.txt /app
 RUN pip install -r requirments.txt --no-cache-dir
 # Copy everything from the current dir to the image
 COPY . .
-#CMD ["flask", "run", "--host", "0.0.0.0"]
+CMD ["flask", "run", "--host", "0.0.0.0"]
