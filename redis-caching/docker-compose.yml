@@ -1,0 +1,40 @@
+version: '3.8'
+services:
+  redis-server:
+    image: redis
+    container_name: redis_container
+    command: redis-server /var/lib/redis/cache/data
+    networks:
+      - default
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./cache-data:/var/lib/redis/cache/data
+  api:
+    container_name: flask_container
+    build: .
+    #entrypoint: python app.py
+    env_file:
+      - .flaskenv
+      - .env
+    ports:
+      - '5000:5000'
+    depends_on:
+      - redis-server
+
+# version: '3'
+# services:
+#   redis:
+#     image: redis
+#     container_name: redis-container
+#     ports:
+#       - "6379:6379"
+#   api:
+#     build: .
+#     container_name: flask-container
+#     env_file:
+#       - .flaskenv
+#     ports:
+#       - '5000:5000'
+#     depends_on:
+#       - redis

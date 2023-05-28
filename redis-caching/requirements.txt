@@ -1,0 +1,11 @@
+Flask
+Flask-JWT-Extended
+Flask-Smorest
+Flask-SQLAlchemy
+passlib
+marshmallow
+Flask-Caching
+python-dotenv
+requests
+gunicorn
+redis
